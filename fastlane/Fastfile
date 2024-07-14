@@ -23,6 +23,8 @@ platform :ios do
     # Bump the build number
     build_number = bump_build_number()
     puts "Bumping build number to #{build_number}"
+    
+    increment_build_number(build_number: build_number)
 
     # Build the app with the updated build number
     build_app(
@@ -37,12 +39,7 @@ platform :ios do
 
     # Upload to TestFlight
     upload_to_testflight(
-      skip_waiting_for_build_processing: true,
-      api_key: {
-        key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
-        issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
-        key: ENV["APP_STORE_CONNECT_KEY"]
-      }
+      skip_waiting_for_build_processing: true
     )
   end
 end
