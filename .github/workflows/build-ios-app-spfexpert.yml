@@ -88,6 +88,7 @@ jobs:
                   APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
                   APP_STORE_CONNECT_API_KEY_PATH: './AuthKey.p8'
               run: |
+                  echo "P12_PASSWORD: $P12_PASSWORD"
                   echo "Key ID: $APP_STORE_CONNECT_KEY_ID"
                   echo "Issuer ID: $APP_STORE_CONNECT_ISSUER_ID"
                   echo "API Key Path: $APP_STORE_CONNECT_API_KEY_PATH"
