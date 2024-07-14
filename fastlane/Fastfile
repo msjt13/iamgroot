@@ -33,7 +33,10 @@ platform :ios do
         provisioningProfiles: {
           "io.appnap.iamgroot" => "Sarwar Apple Distribution - I am Groot"
         }
-      }
+      },
+      include_bitcode: false,
+      export_team_id: "L3D3A22YK5",
+      codesigning_identity: "iPhone Distribution"
     )
 
     # Upload to TestFlight
