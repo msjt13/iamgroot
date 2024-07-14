@@ -3,7 +3,13 @@ default_platform(:ios)
 platform :ios do
   # Get the latest build number from TestFlight
   def bump_build_number()
-    latest_build_number = latest_testflight_build_number(initial_build_number: 0)
+    current_version = get_version_number(
+      target: "main-target"
+    )
+    latest_build_number = latest_testflight_build_number(
+      initial_build_number: 0,
+      version: current_version,
+    )
     return (latest_build_number + 1)
   end
   
