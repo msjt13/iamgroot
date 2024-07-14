@@ -1,4 +1,4 @@
-name: 'Build iOS app'
+name: 'Build and Deploy iOS app'
 
 on:
     push:
@@ -9,12 +9,18 @@ on:
 jobs:
     build_with_signing:
         runs-on: macos-latest
+
         steps:
             - name: check Xcode version
               run: /usr/bin/xcodebuild -version
 
             - name: checkout repository
               uses: actions/checkout@v3
+
+            - name: Install dependencies
+              run: |
+                  brew install ruby
+                  sudo gem install fastlane -NV
 
             - name: Install the Apple certificate and provisioning profile
               env:
@@ -50,7 +56,7 @@ jobs:
                   xcodebuild -scheme "I am Groot" \
                   -archivePath $RUNNER_TEMP/iamgroot.xcarchive \
                   -sdk iphoneos \
-                  -configuration Distribution \
+                  -configuration Release \
                   -destination generic/platform=iOS \
                   -allowProvisioningUpdates \
                   clean archive \
@@ -74,9 +80,10 @@ jobs:
                   path: ${{ runner.temp }}/build/I\ am\ Groot.ipa
                   retention-days: 3
 
-            - name: Upload to TestFlight
+            - name: Upload to TestFlight and handle post-upload steps
               env:
                   APPLE_ID: ${{ secrets.APPLE_ID }}
                   APP_SPECIFIC_PASSWORD: ${{ secrets.APP_SPECIFIC_PASSWORD }}
               run: |
-                  xcrun altool --upload-app -t ios -f $RUNNER_TEMP/build/I\ am\ Groot.ipa -u "$APPLE_ID" -p "$APP_SPECIFIC_PASSWORD" --verbose
+                  fastlane deliver --ipa $RUNNER_TEMP/build/I\ am\ Groot.ipa --skip_screenshots --skip_metadata --force
+                  fastlane deploy
