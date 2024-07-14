@@ -50,10 +50,14 @@ jobs:
                   xcodebuild -scheme "I am Groot" \
                   -archivePath $RUNNER_TEMP/iamgroot.xcarchive \
                   -sdk iphoneos \
-                  -configuration Release \
+                  -configuration Distribution \
                   -destination generic/platform=iOS \
                   -allowProvisioningUpdates \
-                  clean archive
+                  clean archive \
+                  CODE_SIGN_STYLE=Manual \
+                  PROVISIONING_PROFILE_SPECIFIER="Sarwar Apple Distribution - I am Groot" \
+                  DEVELOPMENT_TEAM="L3D3A22YK5" \
+                  CODE_SIGN_IDENTITY="iPhone Distribution"
 
             - name: export ipa
               env:
