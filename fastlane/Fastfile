@@ -30,7 +30,12 @@ platform :ios do
     )
     upload_to_testflight(
       skip_waiting_for_build_processing: false,
-      api_key_path: ENV["APP_STORE_CONNECT_API_KEY_PATH"]
+      api_key: {
+        key_id: "5J2W9834L7",
+        issuer_id: "0b5682ab-82e4-4112-9212-1175b2c5ab55",
+        key: "-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgKQMTp3SQDxkXVKSi\nYU/JDvRFxflKZTwe++RdOnAh3lagCgYIKoZIzj0DAQehRANCAATc7z8e5h1N0Bwl\no7jThziy/hgprsL7rWoMymgew0brCNolhDuUUqStCaGL6re8jaWm2nUFmrx9eJGV
+6L4YbI3l\n-----END PRIVATE KEY-----"
+      }
     )
     set_app_encryption_declaration(
       app_identifier: "io.appnap.iamgroot",
