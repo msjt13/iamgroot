@@ -46,4 +46,4 @@ jobs:
                   APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
                   APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
               run: |
-                  fastlane beta
+                  fastlane beta provisioning_profile:"Sarwar Apple Distribution - I am Groot"
