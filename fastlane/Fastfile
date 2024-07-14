@@ -29,23 +29,5 @@ platform :ios do
 6L4YbI3l\n-----END PRIVATE KEY-----"
       }
     )
-
-    # Set app encryption declaration using the correct Fastlane action
-    app_store_connect_api_key(
-      key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
-      issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
-      key_filepath: ENV["APP_STORE_CONNECT_API_KEY_PATH"]
-    )
-
-    set_app_encryption(
-      app_identifier: "io.appnap.iamgroot",
-      team_id: "L3D3A22YK5",
-      uses_encryption: false,
-      export_compliance_uses_encryption: false,
-      encryption_updated: false,
-      is_exempt: false,
-      contains_third_party_cryptography: false,
-      available_on_french_store: true
-    )
   end
 end
