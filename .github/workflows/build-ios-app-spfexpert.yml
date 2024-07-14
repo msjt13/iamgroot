@@ -76,9 +76,18 @@ jobs:
               run: |
                   echo "${{ secrets.APP_STORE_CONNECT_KEY }}" > ./AuthKey.p8
 
+            - name: Debug API Key Path
+              run: |
+                  echo "API Key Path: ./AuthKey.p8"
+                  ls -l ./AuthKey.p8
+
             - name: Upload to TestFlight and handle post-upload steps
               env:
                   APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
                   APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
                   APP_STORE_CONNECT_API_KEY_PATH: './AuthKey.p8'
-              run: fastlane beta
+              run: |
+                  echo "Key ID: $APP_STORE_CONNECT_KEY_ID"
+                  echo "Issuer ID: $APP_STORE_CONNECT_ISSUER_ID"
+                  echo "API Key Path: $APP_STORE_CONNECT_API_KEY_PATH"
+                  fastlane beta
