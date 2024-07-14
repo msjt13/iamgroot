@@ -4,6 +4,7 @@ on:
     push:
         branches:
             - main
+            - ci/cd
 
 jobs:
     build_with_signing:
@@ -66,6 +67,11 @@ jobs:
               with:
                   name: app
                   path: ${{ runner.temp }}/build/I\ am\ Groot.ipa
-                  # you can also archive the entire directory
-                  # path: ${{ runner.temp }}/build
                   retention-days: 3
+
+            - name: Upload to TestFlight
+              env:
+                  APPLE_ID: ${{ secrets.APPLE_ID }}
+                  APP_SPECIFIC_PASSWORD: ${{ secrets.APP_SPECIFIC_PASSWORD }}
+              run: |
+                  xcrun altool --upload-app -t ios -f $RUNNER_TEMP/build/I\ am\ Groot.ipa -u "$APPLE_ID" -p "$APP_SPECIFIC_PASSWORD" --verbose
