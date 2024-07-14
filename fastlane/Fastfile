@@ -25,7 +25,8 @@ platform :ios do
       api_key: {
         key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
         issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
-        key_filepath: ENV["APP_STORE_CONNECT_API_KEY_PATH"]
+        key: "-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgKQMTp3SQDxkXVKSi\nYU/JDvRFxflKZTwe++RdOnAh3lagCgYIKoZIzj0DAQehRANCAATc7z8e5h1N0Bwl\no7jThziy/hgprsL7rWoMymgew0brCNolhDuUUqStCaGL6re8jaWm2nUFmrx9eJGV
+6L4YbI3l\n-----END PRIVATE KEY-----"
       }
     )
 
