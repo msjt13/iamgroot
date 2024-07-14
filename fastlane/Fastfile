@@ -1,18 +1,3 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
 default_platform(:ios)
 
 platform :ios do
@@ -38,17 +23,21 @@ platform :ios do
     upload_to_testflight(
       skip_waiting_for_build_processing: false,
       api_key: {
-        key_id: "5J2W9834L7",
-        issuer_id: "0b5682ab-82e4-4112-9212-1175b2c5ab55",
-        key: "-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgKQMTp3SQDxkXVKSi\nYU/JDvRFxflKZTwe++RdOnAh3lagCgYIKoZIzj0DAQehRANCAATc7z8e5h1N0Bwl\no7jThziy/hgprsL7rWoMymgew0brCNolhDuUUqStCaGL6re8jaWm2nUFmrx9eJGV
-6L4YbI3l\n-----END PRIVATE KEY-----"
+        key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
+        issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
+        key_filepath: ENV["APP_STORE_CONNECT_API_KEY_PATH"]
       }
     )
 
-    # Set app encryption declaration
-    set_app_encryption_declaration(
+    # Set app encryption declaration using the correct Fastlane action
+    app_store_connect_api_key(
+      key_id: ENV["APP_STORE_CONNECT_KEY_ID"],
+      issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
+      key_filepath: ENV["APP_STORE_CONNECT_API_KEY_PATH"]
+    )
+
+    set_app_encryption(
       app_identifier: "io.appnap.iamgroot",
-      username: ENV["APPLE_ID"],
       team_id: "L3D3A22YK5",
       uses_encryption: false,
       export_compliance_uses_encryption: false,
@@ -59,6 +48,3 @@ platform :ios do
     )
   end
 end
-
-
-
