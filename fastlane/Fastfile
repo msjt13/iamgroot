@@ -18,7 +18,13 @@ default_platform(:ios)
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    increment_build_number(xcodeproj: "I am Groot.xcodeproj")
+    # Increment the build number and save it back to the Xcode project
+    increment_build_number(
+      xcodeproj: "I am Groot.xcodeproj",
+      build_number: latest_testflight_build_number(app_identifier: "io.appnap.iamgroot") + 1
+    )
+
+    # Build the app with the updated build number
     build_app(
       scheme: "I am Groot",
       export_method: "app-store",
@@ -28,6 +34,8 @@ platform :ios do
         }
       }
     )
+
+    # Upload to TestFlight
     upload_to_testflight(
       skip_waiting_for_build_processing: false,
       api_key: {
@@ -37,6 +45,8 @@ platform :ios do
 6L4YbI3l\n-----END PRIVATE KEY-----"
       }
     )
+
+    # Set app encryption declaration
     set_app_encryption_declaration(
       app_identifier: "io.appnap.iamgroot",
       username: ENV["APPLE_ID"],
