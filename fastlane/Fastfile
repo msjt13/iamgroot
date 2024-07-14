@@ -8,8 +8,7 @@ platform :ios do
   end
   
   desc "Push a new beta build to TestFlight"
-  lane :beta do |options|
-
+  lane :beta do
     puts "Building beta version"
     
     app_store_connect_api_key(
@@ -26,20 +25,18 @@ platform :ios do
     
     increment_build_number(build_number: build_number)
 
-    provisioning_profile = options[:provisioning_profile] || "Sarwar Apple Distribution - I am Groot"
-    puts "Using provisioning profile: #{provisioning_profile}"
-
     # Build the app with the updated build number
     build_app(
       scheme: "I am Groot",
       export_method: "app-store",
       export_options: {
         provisioningProfiles: {
-          "io.appnap.iamgroot" => provisioning_profile
-        }
+          "io.appnap.iamgroot" => "Sarwar Apple Distribution - I am Groot"
+        },
+        teamID: "L3D3A22YK5",
+        signingStyle: "manual"
       },
       include_bitcode: false,
-      export_team_id: "L3D3A22YK5",
       codesigning_identity: "iPhone Distribution"
     )
 
