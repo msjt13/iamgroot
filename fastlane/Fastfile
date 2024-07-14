@@ -32,10 +32,11 @@ platform :ios do
       export_options: {
         provisioningProfiles: {
           "io.appnap.iamgroot" => "Sarwar Apple Distribution - I am Groot"
-        }
+        },
+        teamID: "L3D3A22YK5",
+        signingStyle: "manual"
       },
       include_bitcode: false,
-      export_team_id: "L3D3A22YK5",
       codesigning_identity: "iPhone Distribution"
     )
 
