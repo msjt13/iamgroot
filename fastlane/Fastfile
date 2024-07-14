@@ -21,7 +21,6 @@ platform :ios do
     # Increment the build number and save it back to the Xcode project
     increment_build_number(
       xcodeproj: "I am Groot.xcodeproj",
-      build_number: latest_testflight_build_number(app_identifier: "io.appnap.iamgroot") + 1
     )
 
     # Build the app with the updated build number
