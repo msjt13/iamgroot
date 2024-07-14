@@ -19,7 +19,15 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     increment_build_number(xcodeproj: "I am Groot.xcodeproj")
-    build_app(scheme: "I am Groot")
+    build_app(
+      scheme: "I am Groot",
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+          "io.appnap.iamgroot" => "Sarwar Apple Distribution - I am Groot"
+        }
+      }
+    )
     upload_to_testflight(skip_waiting_for_build_processing: false)
     set_app_encryption_declaration(
       app_identifier: "io.appnap.iamgroot",
@@ -34,4 +42,5 @@ platform :ios do
     )
   end
 end
+
 
